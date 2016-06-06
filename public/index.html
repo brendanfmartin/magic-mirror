@@ -1,0 +1,60 @@
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="magicMirror">
+<head>
+  <!-- META -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <title>Mirror</title>
+
+  <!-- SCROLLS -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="styles/index.css">
+
+
+  <!-- SPELLS -->
+  <script src="//cdn.socket.io/socket.io-1.2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script><!-- load angular -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script><!-- load moment -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js"></script>
+  <script src="js/controllers/main.js"></script> <!-- load up our controller -->
+  <script src="js/services/mirror.js"></script> <!-- load our todo service -->
+  <script src="js/core.js"></script> <!-- load our main application -->
+
+</head>
+
+
+
+<!-- SET THE CONTROLLER -->
+<body ng-controller="mainController">
+  <div class="weather">
+    <div class="main">
+      <div class="temp">{{weather.main.temp}}&deg;</div>
+      <div class="icon" style="height:40px;width:50px;background-image: url('http://openweathermap.org/img/w/{{weather.weather[0].icon}}.png');"></div>
+      <div class="description">{{weather.weather[0].description}}</div>
+    </div>
+    <div class="secondary">
+      <div>{{weather.name | lowercase}}</div>
+      <div>{{weather.main.humidity}} &#37;</div>
+      <div>lo {{weather.main.temp_min}}</div>
+      <div>hi {{weather.main.temp_max}}</div>
+    </div>
+  </div>
+
+<div class="news">
+  <ul>
+    <li ng-repeat="USNews in USNewsFeed">
+      <div class="news_title">{{USNews.title}}</div>
+      <div class="news_snippet">{{USNews.contentSnippet}}</div>
+    </li>
+  </ul>
+</div>
+
+</body>
+</html>
