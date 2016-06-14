@@ -6,6 +6,25 @@ body {
   height: 100%;
 }
 
+.dateTime {
+  float: left;
+}
+
+.dateTime .time {
+  font-size: 6rem;
+}
+
+.dateTime .day {
+  font-size: 5rem;
+  color: rgba(255, 255, 255, .6);
+}
+
+.dateTime .date {
+  font-size: 5rem;
+  color: rgba(255, 255, 255, .6);
+}
+
+
 .weather {
   float: right;
   text-align: right;

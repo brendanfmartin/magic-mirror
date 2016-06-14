@@ -33,6 +33,11 @@
 
 <!-- SET THE CONTROLLER -->
 <body ng-controller="mainController">
+  <div class="dateTime">
+    <div class="time">{{time.time}}</div>
+    <div class="day">{{time.day}}</div>
+    <div class="date">{{time.date}}</div>
+  </div>
   <div class="weather">
     <div class="main">
       <div class="temp">{{weather.main.temp}}&deg;</div>
