@@ -1,8 +1,11 @@
 {
-  "name": "magic-mirro",
+  "name": "magic-mirror",
   "version": "0.0.1",
   "description": "Magic Mirror",
   "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "author": "Brendan Martin",
   "dependencies": {
     "body-parser": "~1.4.3",
