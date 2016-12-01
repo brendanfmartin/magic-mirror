@@ -1,65 +1,102 @@
-<!doctype html>
-
-<!-- ASSIGN OUR ANGULAR MODULE -->
-<html ng-app="magicMirror">
+<!DOCTYPE html>
+<html>
 <head>
-  <!-- META -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
-
-  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
-
+  <meta charset="UTF-8" />
   <title>Mirror</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- SCROLLS -->
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
   <link rel="stylesheet" href="styles/index.css">
 
-
-  <!-- SPELLS -->
-  <script src="//cdn.socket.io/socket.io-1.2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script><!-- load angular -->
-  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script><!-- load moment -->
-  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js"></script>
-  <script src="js/controllers/main.js"></script> <!-- load up our controller -->
-  <script src="js/services/mirror.js"></script> <!-- load our todo service -->
-  <script src="js/core.js"></script> <!-- load our main application -->
-
+  <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+  <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
 </head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
 
+  ReactDOM.render(
+      <h1>Hello, world!</h1>,
+    document.getElementById('root')
+  );
 
-
-<!-- SET THE CONTROLLER -->
-<body ng-controller="mainController">
-  <div class="dateTime">
-    <div class="time">{{time.time}}</div>
-    <div class="day">{{time.day}}</div>
-    <div class="date">{{time.date}}</div>
-  </div>
-  <div class="weather">
-    <div class="main">
-      <div class="temp">{{weather.main.temp}}&deg;</div>
-      <div class="icon" style="height:40px;width:50px;background-image: url('http://openweathermap.org/img/w/{{weather.weather[0].icon}}.png');"></div>
-      <div class="description">{{weather.weather[0].description}}</div>
-    </div>
-    <div class="secondary">
-      <div>{{weather.name | lowercase}}</div>
-      <div>{{weather.main.humidity}} &#37;</div>
-      <div>hi {{weather.main.temp_max}}</div>
-      <div>lo {{weather.main.temp_min}}</div>
-    </div>
-  </div>
-
-<div class="news">
-  <ul>
-    <li ng-repeat="USNews in USNewsFeed">
-      <div class="news_title">{{USNews.title}}</div>
-      <div class="news_snippet">{{USNews.contentSnippet}}</div>
-    </li>
-  </ul>
-</div>
-
+</script>
 </body>
 </html>
+
+
+<!--<!doctype html>-->
+
+<!--&lt;!&ndash; ASSIGN OUR ANGULAR MODULE &ndash;&gt;-->
+<!--<html ng-app="magicMirror">-->
+<!--<head>-->
+  <!--&lt;!&ndash; META &ndash;&gt;-->
+  <!--<meta charset="utf-8">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1">&lt;!&ndash; Optimize mobile viewport &ndash;&gt;-->
+
+  <!--<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">-->
+  <!--<link rel="icon" href="/favicon.ico" type="image/x-icon">-->
+
+  <!--<title>Mirror</title>-->
+
+  <!--&lt;!&ndash; SCROLLS &ndash;&gt;-->
+  <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">&lt;!&ndash; load bootstrap &ndash;&gt;-->
+  <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">-->
+  <!--<link rel="stylesheet" href="styles/index.css">-->
+
+
+  <!--&lt;!&ndash; SPELLS &ndash;&gt;-->
+  <!--<script src="//cdn.socket.io/socket.io-1.2.0.js"></script>-->
+  <!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>&lt;!&ndash; load angular &ndash;&gt;-->
+  <!--<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>&lt;!&ndash; load moment &ndash;&gt;-->
+  <!--<script src="//cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js"></script>-->
+  <!--<script src="js/controllers/main.js"></script> &lt;!&ndash; load up our controller &ndash;&gt;-->
+  <!--<script src="js/services/mirror.js"></script> &lt;!&ndash; load our todo service &ndash;&gt;-->
+  <!--<script src="js/core.js"></script> &lt;!&ndash; load our main application &ndash;&gt;-->
+
+<!--</head>-->
+
+
+
+<!--&lt;!&ndash; SET THE CONTROLLER &ndash;&gt;-->
+<!--<body ng-controller="mainController">-->
+  <!--<div class="dateTime">-->
+    <!--<div class="time">{{time.time}}</div>-->
+    <!--<div class="day">{{time.day}}</div>-->
+    <!--<div class="date">{{time.date}}</div>-->
+  <!--</div>-->
+  <!--<div class="weather">-->
+    <!--<div class="main">-->
+      <!--<div class="temp">{{weather.main.temp}}&deg;</div>-->
+      <!--<div class="icon" style="height:40px;width:50px;background-image: url('http://openweathermap.org/img/w/{{weather.weather[0].icon}}.png');"></div>-->
+      <!--<div class="description">{{weather.weather[0].description}}</div>-->
+    <!--</div>-->
+    <!--<div class="secondary">-->
+      <!--<div>{{weather.name | lowercase}}</div>-->
+      <!--<div>{{weather.main.humidity}} &#37;</div>-->
+      <!--<table>-->
+        <!--<tr>-->
+          <!--<td>hi</td>-->
+          <!--<td>{{weather.main.temp_max}}</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+          <!--<td>lo</td>-->
+          <!--<td>{{weather.main.temp_min}}</td>-->
+        <!--</tr>-->
+      <!--</table>-->
+    <!--</div>-->
+  <!--</div>-->
+
+<!--<div class="news">-->
+  <!--<ul>-->
+    <!--<li ng-repeat="USNews in USNewsFeed">-->
+      <!--<div class="news_title">{{USNews.title}}</div>-->
+      <!--<div class="news_snippet">{{USNews.contentSnippet}}</div>-->
+    <!--</li>-->
+  <!--</ul>-->
+<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->
