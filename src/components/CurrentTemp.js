@@ -6,7 +6,7 @@ const long = '-75.6231406';
 const darkSkyForecast = 'https://api.darksky.net/forecast/' + apiKey + '/' + lat + ',' + long;
 
 const openWeatherAPI = 'aa0db56eb7a3c08c9040e72966b27cd6';
-let openWeatherForecast = '//api.openweathermap.org/data/2.5/weather?q=West%20Chester,PA&appid='+openWeatherAPI+'&units=imperial';
+let openWeatherForecast = 'https://api.openweathermap.org/data/2.5/weather?q=West%20Chester,PA&appid='+openWeatherAPI+'&units=imperial';
 
 export class CurrentTemp extends Component {
 
