@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { CurrentTemp } from './components/CurrentTemp'
+import React, {Component} from "react";
+import "./App.css";
+import {CurrentTemp} from "./components/CurrentTemp";
 
 class App extends Component {
   render() {
@@ -11,7 +10,6 @@ class App extends Component {
           <CurrentTemp/>
         </div>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
         </p>
       </div>
     );

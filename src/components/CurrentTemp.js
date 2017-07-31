@@ -6,39 +6,52 @@ const long = '-75.6231406';
 const darkSkyForecast = 'https://api.darksky.net/forecast/' + apiKey + '/' + lat + ',' + long;
 
 const openWeatherAPI = 'aa0db56eb7a3c08c9040e72966b27cd6';
-const openWeatherForecast = 'http://api.openweathermap.org/data/2.5/weather?q=West%20Chester,PA&appid='+openWeatherAPI+'&units=imperial';
+let openWeatherForecast = 'http://api.openweathermap.org/data/2.5/weather?q=West%20Chester,PA&appid='+openWeatherAPI+'&units=imperial';
 
 export class CurrentTemp extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      temp: null
-    }
+      temp: undefined
+    };
+    this.getWeather();
   }
 
   getWeather() {
-    return fetch(openWeatherForecast)
-      .then((res) => {
-        return res.json();
-      })
-      .then((resBody) => {
-        console.log(resBody);
-        return resBody.main.temp
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }
-
-  componentDidMount() {
-    this.setState({temp: this.getWeather()});
+    navigator.geolocation.getCurrentPosition((position) => {
+      let lat = position.coords.latitude;
+      let lon = position.coords.longitude;
+      openWeatherForecast = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid='+openWeatherAPI+'&units=imperial';
+      fetch(openWeatherForecast)
+        .then((res) => {
+          return res.json();
+        })
+        .then((resBody) => {
+          console.log(resBody);
+          this.setState({temp: resBody.main.temp})
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    });
   }
 
   render() {
     return (
       <div>
-        <h1>test</h1>
+        {this.state.temp === undefined &&
+        <h2>
+          Loading your current temp...
+        </h2>
+        }
+
+        {this.state.temp !== undefined &&
+          <div>
+            <p>Hi Rach, it's</p>
+            <h2>{this.state.temp}</h2>
+          </div>
+        }
       </div>
     )
   }
