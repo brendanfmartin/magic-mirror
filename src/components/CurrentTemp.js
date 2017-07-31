@@ -8,6 +8,9 @@ const darkSkyForecast = 'https://api.darksky.net/forecast/' + apiKey + '/' + lat
 const openWeatherAPI = 'aa0db56eb7a3c08c9040e72966b27cd6';
 let openWeatherForecast = '';
 
+const apixuAPIKey = 'b6b024af2e5448f4bde153614173107';
+let apixuAPI = '';
+
 export class CurrentTemp extends Component {
 
   constructor(props) {
@@ -22,14 +25,15 @@ export class CurrentTemp extends Component {
     navigator.geolocation.getCurrentPosition((position) => {
       let lat = position.coords.latitude;
       let lon = position.coords.longitude;
-      openWeatherForecast = 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid='+openWeatherAPI+'&units=imperial';
-      fetch(openWeatherForecast)
+      // openWeatherForecast = 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid='+openWeatherAPI+'&units=imperial';
+      apixuAPI = 'https://api.apixu.com/v1/current.json?key=' + apixuAPIKey + '&q=' + lat + ',' + lon;
+      fetch(apixuAPI)
         .then((res) => {
           return res.json();
         })
         .then((resBody) => {
           console.log(resBody);
-          this.setState({temp: resBody.main.temp})
+          this.setState({temp: resBody.current.temp_f})
         })
         .catch((err) => {
           console.error(err);
