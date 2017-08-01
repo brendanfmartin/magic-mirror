@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
-
-const apiKey = '243830a53c8e5bec35d4bf48f9bc600e';
-const lat = '39.9602166';
-const long = '-75.6231406';
-const darkSkyForecast = 'https://api.darksky.net/forecast/' + apiKey + '/' + lat + ',' + long;
-
-const openWeatherAPI = 'aa0db56eb7a3c08c9040e72966b27cd6';
-let openWeatherForecast = '';
+import "./CurrentTemp.css";
 
 const apixuAPIKey = 'b6b024af2e5448f4bde153614173107';
 let apixuAPI = '';
@@ -16,24 +9,37 @@ export class CurrentTemp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      temp: undefined
+      current: {},
+      location: {},
+      forecast: {}
     };
     this.getWeather();
+  }
+
+  renderSomethingMethod(min, max, current) {
+    let returnJSX = [];
+    for(let i = min; i < max; i++) {
+      returnJSX.unshift(<div key={i} className={'temp_chart ' + (i > current? 'dull': 'bright') }></div>);
+    }
+    return returnJSX;
   }
 
   getWeather() {
     navigator.geolocation.getCurrentPosition((position) => {
       let lat = position.coords.latitude;
       let lon = position.coords.longitude;
-      // openWeatherForecast = 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid='+openWeatherAPI+'&units=imperial';
-      apixuAPI = 'https://api.apixu.com/v1/current.json?key=' + apixuAPIKey + '&q=' + lat + ',' + lon;
+      apixuAPI = 'https://api.apixu.com/v1/forecast.json?key=' + apixuAPIKey + '&q=' + lat + ',' + lon;
       fetch(apixuAPI)
         .then((res) => {
           return res.json();
         })
         .then((resBody) => {
           console.log(resBody);
-          this.setState({temp: resBody.current.temp_f})
+          this.setState({
+            current: resBody.current,
+            location: resBody.location,
+            forecast: resBody.forecast
+          });
         })
         .catch((err) => {
           console.error(err);
@@ -44,16 +50,30 @@ export class CurrentTemp extends Component {
   render() {
     return (
       <div>
-        {this.state.temp === undefined &&
+        {this.state.current.temp_f === undefined &&
         <h2>
           Loading your current temp...
         </h2>
         }
 
-        {this.state.temp !== undefined &&
+        {this.state.current.temp_f !== undefined &&
           <div>
-            <p>Hi Rach, it's</p>
-            <h2>{this.state.temp}</h2>
+            <h2>{parseInt(this.state.current.temp_f, 0)}</h2>
+            <img style={{'filter': 'brightness(0) invert(1)'}}
+                 src={this.state.current.condition.icon}
+                 alt={this.state.current.condition.text}
+            />
+            <h3>{this.state.current.condition.text}</h3>
+            <h3>{this.state.location.name}</h3>
+            <h3>{parseInt(this.state.forecast.forecastday[0].day.maxtemp_f, 0)}</h3>
+            <h3>{parseInt(this.state.forecast.forecastday[0].day.mintemp_f, 0)}</h3>
+            <div>
+              {this.renderSomethingMethod(
+                parseInt(this.state.forecast.forecastday[0].day.mintemp_f, 0),
+                parseInt(this.state.forecast.forecastday[0].day.maxtemp_f, 0),
+                parseInt(this.state.current.temp_f, 0)
+              )}
+            </div>
           </div>
         }
       </div>

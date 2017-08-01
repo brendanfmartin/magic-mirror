@@ -9,8 +9,6 @@ class App extends Component {
         <div className="App-header">
           <CurrentTemp/>
         </div>
-        <p className="App-intro">
-        </p>
       </div>
     );
   }
