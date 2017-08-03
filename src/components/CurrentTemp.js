@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { TempBar } from "./TempBar.js";
 import { ForecastGraph } from "./ForecastGraph.js"
+import { Weather } from "../services/Weather.js"
 import "./CurrentTemp.css";
 
 const apixuAPIKey = 'b6b024af2e5448f4bde153614173107';
@@ -16,6 +17,7 @@ export class CurrentTemp extends Component {
       forecast: {}
     };
     this.getWeather();
+    Weather.getWeather();
   }
 
   tempBar(min, max, current) {
@@ -27,9 +29,11 @@ export class CurrentTemp extends Component {
   }
 
   getWeather() {
-    navigator.geolocation.getCurrentPosition((position) => {
-      let lat = position.coords.latitude;
-      let lon = position.coords.longitude;
+    // navigator.geolocation.getCurrentPosition((position) => {
+    //   let lat = position.coords.latitude;
+    //   let lon = position.coords.longitude;
+    let lat = 32;
+    let lon = -72;
       apixuAPI = 'https://api.apixu.com/v1/forecast.json?key=' + apixuAPIKey + '&q=' + lat + ',' + lon;
       fetch(apixuAPI)
         .then((res) => {
@@ -46,7 +50,7 @@ export class CurrentTemp extends Component {
         .catch((err) => {
           console.error(err);
         });
-    });
+    // });
   }
 
   render() {

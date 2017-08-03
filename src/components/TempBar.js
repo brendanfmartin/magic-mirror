@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
+import { Weather } from "../services/Weather.js"
 import "./TempBar.css";
 
 export class TempBar extends Component {
+
+  constructor() {
+    super();
+    Weather.getWeather();
+  }
 
 
   tempBar(min, max, temp) {
