@@ -9,7 +9,7 @@ class App extends Component {
     super();
     this.state = {
       value: ''
-    }
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,8 +30,9 @@ class App extends Component {
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
+    alert('A name was submitted: ' + this.state.value);
+
   }
 
   render() {
@@ -40,14 +41,9 @@ class App extends Component {
 
 
         <form onSubmit={this.handleSubmit}>
-          <label>
-            Name:
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Submit" />
+          <input type="text" value={this.state.value} onChange={this.handleChange} maxLength={5}/>
+          <input type="submit" value="Zip Code" disabled={this.state.value.length < 5 }/>
         </form>
-
-
 
 
         {
