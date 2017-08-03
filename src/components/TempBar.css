@@ -1,0 +1,14 @@
+.temp_chart {
+  height: 20px;
+  width: 100px;
+  margin: 5px 0;
+}
+
+.dull {
+  background: lightgrey;
+}
+
+.bright {
+  background: white;
+  box-shadow: 0px 0px 10px 0px rgba(255,255,255,1);
+}

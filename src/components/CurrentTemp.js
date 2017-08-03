@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { TempBar } from "./TempBar.js";
+import { ForecastGraph } from "./ForecastGraph.js"
 import "./CurrentTemp.css";
 
 const apixuAPIKey = 'b6b024af2e5448f4bde153614173107';
@@ -16,7 +18,7 @@ export class CurrentTemp extends Component {
     this.getWeather();
   }
 
-  renderSomethingMethod(min, max, current) {
+  tempBar(min, max, current) {
     let returnJSX = [];
     for(let i = min; i < max; i++) {
       returnJSX.unshift(<div key={i} className={'temp_chart ' + (i > current? 'dull': 'bright') }></div>);
@@ -68,11 +70,14 @@ export class CurrentTemp extends Component {
             <h3>{parseInt(this.state.forecast.forecastday[0].day.maxtemp_f, 0)}</h3>
             <h3>{parseInt(this.state.forecast.forecastday[0].day.mintemp_f, 0)}</h3>
             <div>
-              {this.renderSomethingMethod(
-                parseInt(this.state.forecast.forecastday[0].day.mintemp_f, 0),
-                parseInt(this.state.forecast.forecastday[0].day.maxtemp_f, 0),
-                parseInt(this.state.current.temp_f, 0)
-              )}
+              <TempBar
+                min={this.state.forecast.forecastday[0].day.mintemp_f}
+                max={this.state.forecast.forecastday[0].day.maxtemp_f}
+                temp={this.state.current.temp_f}
+              />
+              <ForecastGraph
+                forecast={this.state.forecast}
+              />
             </div>
           </div>
         }
