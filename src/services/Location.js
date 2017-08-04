@@ -2,23 +2,33 @@ export class Location {
 
   static setZip(zip) {
     let locationObj = {
-      lat: null,
-      long: null,
       zip: zip
     };
-    localStorage.setItem('location', locationObj)
+    localStorage.setItem('location', JSON.stringify(locationObj))
+  }
+
+  static setLatLong(lat, long) {
+    let locationObj = {
+      lat: lat,
+      long: long
+    };
+    localStorage.setItem('location', JSON.stringify(locationObj))
   }
 
   static setCurrentLocation(location) {
     if (!!location.zipcode) {
-
+      return true;
     }
     if(!!location.lat && !!location.long) {
 
     }
   }
 
+  static hasCurrentLocation() {
+    return !!localStorage.getItem('location');
+  }
+
   static getCurrentLocation() {
-    localStorage.getItem('weatherData');
+    return JSON.parse(localStorage.getItem('location'));
   }
 }

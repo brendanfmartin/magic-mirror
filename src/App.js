@@ -8,7 +8,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      value: ''
+      zip: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -17,59 +17,52 @@ class App extends Component {
 
   handleChange(event) {
     console.log(this.state)
-    this.setState({value: event.target.value});
+    this.setState({zip: event.target.value});
   }
 
   processZip() {
-    let isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(this.state.zip);
-    alert('test');
+    return /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(this.state.zip);
   }
 
   findUser() {
-    alert('boom');
+    navigator.geolocation.getCurrentPosition((position) => {
+      let lat = position.coords.latitude;
+      let long = position.coords.longitude;
+      Location.setLatLong(lat, long);
+    });
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    alert('A name was submitted: ' + this.state.value);
+    if (this.processZip()) {
+      Location.setZip(this.state.zip);
+    } else {
+      alert('invalid zip');
+    }
 
   }
 
   render() {
     return (
       <div className="App">
-
-
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" value={this.state.value} onChange={this.handleChange} maxLength={5}/>
-          <input type="submit" value="Zip Code" disabled={this.state.value.length < 5 }/>
-        </form>
-
-
         {
-          !Location.getCurrentLocation() &&
-          <div>
+          !Location.hasCurrentLocation() &&
             <div>
-              <h1>zip entry</h1>
-              <input
-                type="text"
-              />
+              <form onSubmit={this.handleSubmit}>
+                <input type="text" value={this.state.zip} onChange={this.handleChange} maxLength={5}/>
+                <input type="submit" value="Zip Code" disabled={this.state.zip.length < 5 }/>
+              </form>
+              <button
+                onClick={this.findUser}
+              >Use location!</button>
             </div>
-            <button
-              onClick={this.processZip}
-            >zip entry</button>
-            <button
-              onClick={this.findUser}
-            >Use location!</button>
-          </div>
         }
         {
-          !!Location.getCurrentLocation() &&
+          !!Location.hasCurrentLocation() &&
           <CurrentTemp/>
         }
       </div>
     );
-    this.testFn();
   }
 }
 
